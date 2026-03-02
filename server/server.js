@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== "production") {
   const cors = require('cors');
   app.use(cors({
-    origin: "http://localhost:5173", // Vite frontend port
+    origin: "http://localhost:5173", 
     credentials: true
   }));
 }
