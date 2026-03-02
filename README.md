@@ -1,26 +1,26 @@
 🍔 MR HOTEL – Food Ordering Website
 
-MR HOTEL is a modern food ordering web application built using the MERN Stack.
-Users can browse food items, place orders, and track their orders easily.
+MR HOTEL is a modern food ordering web application built with the MERN Stack, allowing users to browse food items, place orders, and track them easily.
 
-🚀 Simple, fast, and user-friendly food ordering experience.
+🚀 Fast, simple, and user-friendly food ordering experience!
 
 ✨ Features
 
-🔐 User Authentication (Login / Register with JWT)
+🔐 User Authentication – Login / Register with JWT
 
-🍽️ Browse Food Items with clean UI
+🍽️ Browse Food Items – Clean and intuitive UI
 
-📦 Place Orders directly from menu
+📦 Place Orders – Directly from the menu
 
-📜 My Orders Page to track your orders
+📜 My Orders Page – Track your orders
 
-🛠️ Admin Panel to view all orders
+🛠️ Admin Panel – View and manage all orders
 
-⚡ Responsive Design (Mobile + Desktop)
+⚡ Responsive Design – Works on Mobile & Desktop
 
 🛠️ Tech Stack
-Frontend ⚛️
+
+Frontend (⚛️ React.js):
 
 React.js
 
@@ -30,17 +30,15 @@ Tailwind CSS
 
 React Router
 
-Backend 🖥️
+Backend (🖥️ Node.js + Express):
 
-Node.js
-
-Express.js
+Node.js & Express.js
 
 MongoDB (Mongoose)
 
 JWT Authentication
 
-Tools 🧰
+Other Tools (🧰):
 
 Git & GitHub
 
@@ -48,40 +46,44 @@ Postman
 
 📂 Project Structure
 mr-hotel/
-│── client/            # Frontend (React)
-│── server/            # Backend (Node + Express)
-│── models/            # MongoDB Models
-│── routes/            # API Routes
-│── controllers/       # Business Logic
-│── middleware/        # Auth Middleware
+│── client/          # Frontend (React)
+│── server/          # Backend (Node + Express)
+│── models/          # MongoDB Models
+│── routes/          # API Routes
+│── controllers/     # Business Logic
+│── middleware/      # Auth Middleware
 │── package.json
 │── README.md
-🚀 Getting Started
-1️⃣ Clone Repository
-git clone https://github.com/<your-username>/mr-hotel.git
+
+1️⃣ Clone the Repository
+git clone https://github.com/intikhabaalam/mr-hotel.git
 cd mr-hotel
 2️⃣ Install Dependencies
-Backend
+# Backend
 cd server
 npm install
-Frontend
+
+# Frontend
 cd client
 npm install
-3️⃣ Environment Variables
+3️⃣ Setup Environment Variables
 
-Create .env file in server folder:
+Create a .env file in the server folder:
 
 PORT=5000
 MONGO_URI=your_mongodb_url
 JWT_SECRET=your_secret_key
-4️⃣ Run Project
-Backend
+4️⃣ Run the App
+# Backend
+cd server
 npm run dev
-Frontend
-npm run dev
-📸 Screens
 
-Home Page (Food Items)
+# Frontend
+cd client
+npm run dev
+📸 Screenshots
+
+Home Page – Browse Food Items
 
 Login / Register
 
@@ -95,12 +97,11 @@ Admin Dashboard
 
 ⭐ Notifications system
 
-⭐ UI enhancements
+⭐ UI/UX enhancements
 
 🤝 Contributing
 
-Pull requests are welcome.
-For major changes, please open an issue first.
+Pull requests are welcome! For major changes, please open an issue first.
 
 📄 License
 
@@ -108,5 +109,4 @@ This project is licensed under the MIT License.
 
 💡 Author
 
-Intikhab Aalam
-💻 MERN Stack Developer
+Intikhab Aalam – MERN Stack Developer
