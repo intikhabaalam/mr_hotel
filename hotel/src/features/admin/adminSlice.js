@@ -1,17 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import adminService from "./adminService";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
 // Fetch dashboard stats
-export const fetchStats = createAsyncThunk("admin/fetchStats", async (_, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await adminService.getStats(token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+export const fetchStats = createAsyncThunk(
+  "admin/fetchStats",
+  async (_, thunkAPI) => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = user?.token;
+      return await adminService.getStats(token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
 const adminSlice = createSlice({
   name: "admin",
@@ -25,7 +27,9 @@ const adminSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchStats.pending, (state) => { state.isLoading = true; })
+      .addCase(fetchStats.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(fetchStats.fulfilled, (state, action) => {
         state.isLoading = false;
         state.stats = action.payload;
