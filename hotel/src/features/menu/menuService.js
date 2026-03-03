@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/menu/";
+// Proxy friendly URL
+const API_URL = "/api/menu/";
 
 // Get all menu items
 const getMenu = async () => {

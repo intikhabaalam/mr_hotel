@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/auth/";
+// Proxy friendly URL
+const API_URL = "/api/auth/";
 
+// Register user
 const register = async (formData) => {
   const response = await axios.post(API_URL + "register", formData);
   localStorage.setItem("user", JSON.stringify(response.data));
@@ -9,6 +11,7 @@ const register = async (formData) => {
   return response.data;
 };
 
+// Login user
 const login = async (formData) => {
   const response = await axios.post(API_URL + "login", formData);
   console.log("LOGIN RESPONSE 👉", response.data);
@@ -17,6 +20,7 @@ const login = async (formData) => {
   return response.data;
 };
 
+// Logout user
 const logout = () => {
   localStorage.clear();
 };

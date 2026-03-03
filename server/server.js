@@ -5,14 +5,6 @@ const path = require('path');
 const connectDB = require('./config/dbConfig');
 const errorHandler = require('./middleware/errorHandler');
 
-// Routes
-const menuRoutes = require("./routes/menuRoutes");
-const bookingRoutes = require("./routes/bookingRoutes");
-const authRoutes = require('./routes/authRoutes');
-const adminRoutes = require("./routes/adminRoutes");
-const orderRoutes = require("./routes/orderRoutes")
-
-
 // ---------------- PORT ----------------
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -22,26 +14,14 @@ connectDB();
 
 // ---------------- Middleware ----------------
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// ---------------- Dev CORS ----------------
-if (process.env.NODE_ENV !== "production") {
- const cors = require('cors');
-
-app.use(cors({
-  origin: "*",
-  credentials: true
-
-  }));
-}
+app.use(express.urlencoded());
 
 // ---------------- Routes ----------------
-app.use("/api/auth", authRoutes);     
-app.use("/api/menu", menuRoutes);     
-app.use("/api/booking", bookingRoutes);  
-app.use("/api/admin", adminRoutes);
-app.use("/api/orders",orderRoutes)
-    
+app.use("/api/auth",require("./routes/authRoutes"));     
+app.use("/api/menu",require("./routes/menuRoutes"));     
+app.use("/api/booking",require("./routes/bookingRoutes"));  
+app.use("/api/admin",require ("./routes/adminRoutes"));
+app.use("/api/orders",require ("./routes/orderRoutes"));
 
 // ---------------- Production Serve React ----------------
 if (process.env.NODE_ENV === "production") {

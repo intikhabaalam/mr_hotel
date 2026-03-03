@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-const userExist = JSON.parse(localStorage.getItem("user")) || null
+const userExist = JSON.parse(localStorage.getItem("user")) || null;
 
-// REGISTER
+// ---------------- REGISTER ----------------
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (formData, thunkAPI) => {
@@ -15,7 +15,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-// LOGIN
+// ---------------- LOGIN ----------------
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (formData, thunkAPI) => {
@@ -27,15 +27,16 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// LOGOUT
+// ---------------- LOGOUT ----------------
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
   return authService.logout();
 });
 
+// ---------------- SLICE ----------------
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: userExist || null,
+    user: userExist,
     isLoading: false,
     isError: false,
     isSuccess: false,

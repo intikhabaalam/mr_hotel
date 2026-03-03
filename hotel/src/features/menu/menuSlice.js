@@ -1,47 +1,64 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import menuService from "./menuService";
 
-const user = JSON.parse(localStorage.getItem("user"));
+// Helper to get user token
+const getUserToken = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token;
+};
 
-// Fetch menu
-export const fetchMenu = createAsyncThunk("menu/fetchMenu", async (_, thunkAPI) => {
-  try {
-    return await menuService.getMenu();
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- FETCH MENU ----------------
+export const fetchMenu = createAsyncThunk(
+  "menu/fetchMenu",
+  async (_, thunkAPI) => {
+    try {
+      return await menuService.getMenu();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
-// Add menu
-export const addMenuItem = createAsyncThunk("menu/addMenuItem", async (menuData, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await menuService.createMenu(menuData, token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- ADD MENU ITEM ----------------
+export const addMenuItem = createAsyncThunk(
+  "menu/addMenuItem",
+  async (menuData, thunkAPI) => {
+    try {
+      const token = getUserToken();
+      return await menuService.createMenu(menuData, token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
-// Update menu
-export const updateMenuItem = createAsyncThunk("menu/updateMenuItem", async ({ id, menuData }, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await menuService.updateMenu(id, menuData, token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- UPDATE MENU ITEM ----------------
+export const updateMenuItem = createAsyncThunk(
+  "menu/updateMenuItem",
+  async ({ id, menuData }, thunkAPI) => {
+    try {
+      const token = getUserToken();
+      return await menuService.updateMenu(id, menuData, token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
-// Delete menu
-export const deleteMenuItem = createAsyncThunk("menu/deleteMenuItem", async (id, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await menuService.deleteMenu(id, token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- DELETE MENU ITEM ----------------
+export const deleteMenuItem = createAsyncThunk(
+  "menu/deleteMenuItem",
+  async (id, thunkAPI) => {
+    try {
+      const token = getUserToken();
+      return await menuService.deleteMenu(id, token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
+// ---------------- SLICE ----------------
 const menuSlice = createSlice({
   name: "menu",
   initialState: {
@@ -67,7 +84,6 @@ const menuSlice = createSlice({
       })
       // Add
       .addCase(addMenuItem.fulfilled, (state, action) => {
-         console.log(action.payload);
         state.items.push(action.payload);
       })
       // Update

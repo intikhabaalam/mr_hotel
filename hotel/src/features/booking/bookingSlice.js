@@ -1,38 +1,52 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import bookingService from "./bookingService";
 
-const user = JSON.parse(localStorage.getItem("user"));
+// Get user token
+const getUserToken = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token;
+};
 
-// Fetch bookings
-export const fetchBookings = createAsyncThunk("booking/fetchBookings", async (_, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await bookingService.getBookings(token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- FETCH BOOKINGS ----------------
+export const fetchBookings = createAsyncThunk(
+  "booking/fetchBookings",
+  async (_, thunkAPI) => {
+    try {
+      const token = getUserToken();
+      return await bookingService.getBookings(token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
-// Add booking
-export const addBooking = createAsyncThunk("booking/addBooking", async (bookingData, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await bookingService.addBooking(bookingData, token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- ADD BOOKING ----------------
+export const addBooking = createAsyncThunk(
+  "booking/addBooking",
+  async (bookingData, thunkAPI) => {
+    try {
+      const token = getUserToken();
+      return await bookingService.addBooking(bookingData, token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
-// Delete booking
-export const deleteBooking = createAsyncThunk("booking/deleteBooking", async (id, thunkAPI) => {
-  try {
-    const token = user?.token;
-    return await bookingService.deleteBooking(id, token);
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.message);
+// ---------------- DELETE BOOKING ----------------
+export const deleteBooking = createAsyncThunk(
+  "booking/deleteBooking",
+  async (id, thunkAPI) => {
+    try {
+      const token = getUserToken();
+      return await bookingService.deleteBooking(id, token);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+    }
   }
-});
+);
 
+// ---------------- SLICE ----------------
 const bookingSlice = createSlice({
   name: "booking",
   initialState: {

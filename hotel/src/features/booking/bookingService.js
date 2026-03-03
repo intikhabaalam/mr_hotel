@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/booking/"
+// Proxy friendly URL
+const API_URL = "/api/booking/";
+
 // Get all bookings
 const getBookings = async (token) => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
